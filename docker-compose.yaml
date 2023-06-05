@@ -1,0 +1,105 @@
+version: "3"
+services:
+  filestash:
+    container_name: filestash
+    image: hub.hamdocker.ir/machines/filestash
+    volumes:
+      - ./data/filestash:/app/data
+    environment:
+    - APPLICATION_URL=files.9craft.site
+    ports:
+    - 8334:8334
+    networks:
+      - backend
+    restart: always
+
+  ftpd_server:
+    build: .
+    image: hub.hamdocker.ir/stilliard/pure-ftpd
+    container_name: pure-ftpd
+    networks:
+      - backend
+    volumes:
+      - /mnt/data:/opt
+      - ftp-data:/etc/pure-ftpd/
+    restart: always
+
+
+  prometheus:
+    image: hub.hamdocker.ir/prom/prometheus:v2.28.1
+    container_name: prometheus
+    environment:
+      TZ: Asia/Tehran
+    volumes:
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus/prometheus:/prometheus
+      - /etc/hosts:/etc/hosts
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    user: root
+    ports:
+      - 0.0.0.0:9090:9090
+    networks:
+      - backend
+    restart: always
+
+
+  grafana:
+    image: hub.hamdocker.ir/grafana/grafana:8.0.6
+    container_name: grafana
+    hostname: grafana
+    user: root
+    environment:
+      TZ: Asia/Tehran
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    ports:
+      - 0.0.0.0:3000:3000
+    networks:
+      - backend
+    restart: always
+
+
+  nginx:
+    image: hub.hamdocker.ir/nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./frontend-dists/dist:/usr/share/nginx/html
+      - ./configs/nginx/servers.conf:/etc/nginx/conf.d/default.conf
+      - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - backend
+    environment:
+      TZ: Asia/Tehran
+      PUID: 1000
+      PGID: 1000
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    restart: always
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+volumes:
+  ftp-data:
+
+networks:
+  backend:
+    external:
+      name: backend

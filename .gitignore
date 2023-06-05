@@ -1,0 +1,7 @@
+frontend-dists/*
+
+data/prometheus
+data/grafana
+data/filestash
+data/sqlite3.db
+
