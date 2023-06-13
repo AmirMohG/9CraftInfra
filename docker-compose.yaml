@@ -17,6 +17,10 @@ services:
     build: .
     image: hub.hamdocker.ir/stilliard/pure-ftpd
     container_name: pure-ftpd
+    environment:
+    - FTP_USER_UID=1001
+    - FTP_USER_GID=1001
+
     networks:
       - backend
     volumes:
