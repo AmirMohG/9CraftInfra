@@ -1,0 +1,10 @@
+route:
+  repeat_interval: 1m
+  group_wait: 1m
+  group_interval: 1m
+  receiver: http-get
+
+receivers:
+- name: http-get
+  webhook_configs:
+    - url: "https://kubot-amirmohgh.kubarcloud.net"

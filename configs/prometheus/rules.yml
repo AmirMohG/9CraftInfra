@@ -1,0 +1,21 @@
+groups:
+- name: node-exporter-alerts
+  rules:
+  - alert: "Disk over 90%"
+    expr: ((node_filesystem_size_bytes{fstype != "tmpfs", device != "tmpfs", mountpoint != "/boot", mountpoint != "/var/log"} -
+      node_filesystem_avail_bytes{fstype != "tmpfs", device != "tmpfs", mountpoint != "/boot", mountpoint != "/var/log"}) /
+      node_filesystem_size_bytes{fstype != "tmpfs", device != "tmpfs", mountpoint != "/boot", mountpoint != "/var/log"}) * 100 > 90
+    for: 1s
+    labels:
+      severity: critical
+    annotations:
+      instance: "{{ .Labels.instance }}"
+      msg: "Disk higher than 90%"
+  - alert: "Less than 10G left"
+    expr: (node_memory_MemAvailable_bytes / 1024 / 1024 / 1024) < 10
+    for: 1s
+    labels:
+      severity: critical
+    annotations:
+      instance: "{{ .Labels.instance }}"
+      msg: "Memory less than 10G"

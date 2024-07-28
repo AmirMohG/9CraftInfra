@@ -1,0 +1,5 @@
+from hub.hamdocker.ir/stilliard/pure-ftpd
+
+run  usermod -u 1001 ftpuser
+run  groupmod -g 1001 ftpgroup
+run  usermod -g 1001 ftpuser
