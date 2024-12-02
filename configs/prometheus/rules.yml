@@ -8,14 +8,10 @@ groups:
     for: 1s
     labels:
       severity: critical
-    annotations:
-      instance: "{{ .Labels.instance }}"
-      msg: "Disk higher than 90%"
+      type: "telegram-disk"
   - alert: "Less than 10G left"
     expr: (node_memory_MemAvailable_bytes / 1024 / 1024 / 1024) < 10
     for: 1s
     labels:
       severity: critical
-    annotations:
-      instance: "{{ .Labels.instance }}"
-      msg: "Memory less than 10G"
+      type: "telegram-ram"
