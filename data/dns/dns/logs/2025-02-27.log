@@ -1,0 +1,45 @@
+[2025-02-27 16:08:34 UTC] Logging started.
+[2025-02-27 16:08:34 UTC] DHCP Server successfully saved scope file: /etc/dns/scopes/Default.scope
+[2025-02-27 16:08:34 UTC] DNS Server auth config file was not found: /etc/dns/auth.config
+[2025-02-27 16:08:34 UTC] DNS Server is restoring default auth config file.
+[2025-02-27 16:08:34 UTC] DNS Server auth config file was saved: /etc/dns/auth.config
+[2025-02-27 16:08:34 UTC] DNS Server config file was not found: /etc/dns/dns.config
+[2025-02-27 16:08:34 UTC] DNS Server is restoring default config file.
+[2025-02-27 16:08:34 UTC] DNS Server config file was saved: /etc/dns/dns.config
+[2025-02-27 16:08:34 UTC] DNS Server is loading allowed zone file: /etc/dns/allowed.config
+[2025-02-27 16:08:34 UTC] DNS Server is loading blocked zone file: /etc/dns/blocked.config
+[2025-02-27 16:08:35 UTC] [172.17.0.1:5380] [HTTP] Web Service failed to bind.
+[2025-02-27 16:08:35 UTC] [127.0.0.1:5380] [HTTP] Web Service failed to bind.
+[2025-02-27 16:08:35 UTC] Web Service failed to start: System.Net.Sockets.SocketException (99): Cannot assign requested address
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.EndpointsStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at DnsServerCore.DnsWebService.StartWebServiceAsync(IReadOnlyList`1 webServiceLocalAddresses, Int32 webServiceHttpPort, Int32 webServiceTlsPort, Boolean httpOnlyMode) in Z:\Technitium\Projects\DnsServer\DnsServerCore\DnsWebService.cs:line 411
+   at DnsServerCore.DnsWebService.StartWebServiceAsync(IReadOnlyList`1 webServiceLocalAddresses, Int32 webServiceHttpPort, Int32 webServiceTlsPort, Boolean httpOnlyMode) in Z:\Technitium\Projects\DnsServer\DnsServerCore\DnsWebService.cs:line 433
+   at DnsServerCore.DnsWebService.TryStartWebServiceAsync(IReadOnlyList`1 oldWebServiceLocalAddresses, Int32 oldWebServiceHttpPort, Int32 oldWebServiceTlsPort) in Z:\Technitium\Projects\DnsServer\DnsServerCore\DnsWebService.cs:line 289
+[2025-02-27 16:08:35 UTC] Attempting to revert Web Service end point changes ...
+[2025-02-27 16:08:35 UTC] [[::]:5380] [HTTP] Web Service was bound successfully.
+[2025-02-27 16:08:35 UTC] DNS Server config file was saved: /etc/dns/dns.config
+[2025-02-27 16:08:35 UTC] [0.0.0.0:53] [UDP] DNS Server was bound successfully.
+[2025-02-27 16:08:35 UTC] [0.0.0.0:53] [TCP] DNS Server was bound successfully.
+[2025-02-27 16:08:35 UTC] [[::]:53] [UDP] DNS Server was bound successfully.
+[2025-02-27 16:08:35 UTC] [[::]:53] [TCP] DNS Server was bound successfully.
+[2025-02-27 16:08:35 UTC] DHCP Server successfully loaded scope: Default
+[2025-02-27 16:08:35 UTC] DHCP Server successfully loaded scope file: /etc/dns/scopes/Default.scope
+[2025-02-27 16:08:35 UTC] DNS Server (v13.4.3.0) was started successfully.
+[2025-02-27 16:08:44 UTC] DNS Server auth config file was saved: /etc/dns/auth.config
