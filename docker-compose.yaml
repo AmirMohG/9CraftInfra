@@ -107,6 +107,7 @@ services:
       - ../frontend-dists/dist:/usr/share/nginx/html
       - ./configs/nginx/servers.conf:/etc/nginx/conf.d/default.conf
       - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./configs/nginx/conf-custom.d:/etc/nginx/conf-custom.d
       - /etc/letsencrypt:/etc/letsencrypt
       - /home/seyed/front:/front
       - /home/seyed/front/build2:/front2
@@ -114,6 +115,7 @@ services:
     networks:
       - backend
       - radio
+      - dns
     environment:
       TZ: Asia/Tehran
       PUID: 1000
@@ -196,6 +198,8 @@ services:
       - "127.0.0.1:5380:5380/tcp" #DNS web console (HTTP)
       - "185.181.180.153:53:53/udp" #DNS service
       - "185.181.180.153:53:53/tcp" #DNS service
+    networks:
+      - dns
     environment:
       - DNS_SERVER_DOMAIN=dns-server #The primary domain name used by this DNS Server to identify itself.
       - DNS_SERVER_ADMIN_PASSWORD=hardP@ssw0rd #DNS web console admin user password.
@@ -228,6 +232,9 @@ networks:
   minecraft:
     external:
       name: minecraft
+  dns:
+    external:
+      name: dns
   backend:
     external:
       name: backend
